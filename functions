@@ -1,0 +1,23 @@
+# Change directory and list it's contents since
+# this is what I want to do most of the time
+#
+function cdls { cd $1; ls; }
+
+# Go to a directory and add it's bin directory
+# to the path
+#
+function go() {
+    cd ${1}
+    _current="$(pwd)"
+    export PATH="${_current}/bin:$PATH"
+}
+
+# Swap the name of 2 files
+#
+function swap() {
+    local TMPFILE=tmp.$$
+
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}

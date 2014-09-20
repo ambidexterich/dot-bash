@@ -1,0 +1,12 @@
+alias pyserv='python -m SimpleHTTPServer'
+
+alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
+alias e='mvim'
+
+# Remove the sleepimage. Will temporarily free up a coupld of gigs
+# of harddrive space
+#
+alias clnslp='sudo rm /private/var/vm/sleepimage'
+
+alias proj="go ~/Dropbox/projects"
+alias sites="go ~/Dropbox/sites"

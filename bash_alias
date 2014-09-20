@@ -1,0 +1,16 @@
+alias vim='TERM=xterm-256color vim'
+alias e='vim'
+
+alias als='e $DOT_BASH/bash_alias'
+alias brc='e $DOT_BASH/bashrc'
+
+# Catch cd .. typo, or for laziness
+#
+alias cd..='cd ..'
+# convenience, deeper would be nice but
+# I might want to consider pushd instead
+#
+alias cd...='cd ../..'
+
+# grep is more useful when the matching element is a different color
+alias grep='grep --color=auto'

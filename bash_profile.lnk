@@ -1,0 +1,61 @@
+IS_MAC=0
+
+# Get the path that this was read from
+#
+DIR="$( cd $( dirname BASH_SOURCE[0] ) && pwd -P )"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    IS_MAC=1
+fi
+
+# -----------------------------------------------------------------------------
+# Source files specific to login shell (ex. terminal or ssh). screen will
+# ignore these
+#
+# login shells use .bash_profile instead of .bashrc so anything to login
+# specific settings get set here.
+# -----------------------------------------------------------------------------
+#
+# Get the real path of the symlink
+#
+BASH_DIR="$(dirname $(readlink ${BASH_SOURCE[0]}))"
+#
+# if .bashrc exists, source it
+#
+if [[ -f $BASH_DIR/bashrc ]]; then
+    . $BASH_DIR/bashrc
+fi
+
+# If there is already a bashrc source it
+# after the dot version to keep any overrides
+if [[ -f $DIR/.bashrc ]]; then
+    . $DIR/.bashrc
+fi
+
+# -----------------------------------------------------------------------------
+# Mac specific commands
+# -----------------------------------------------------------------------------
+#
+if [[ $IS_MAC -eq 1 ]]; then
+#
+#
+# Mac specific aliases which may override bash_alias
+#
+if [[ -f $BASH_DIR/mac_alias ]]; then
+    . $BASH_DIR/mac_alias
+fi
+#
+# Source brew bash completion
+#
+_brew="`brew --prefix`/Library/Contributions/"
+[[ -s "${_brew}/brew_bash_completion.sh" ]] && source "${_brew}/brew_bash_completion.sh"
+#
+# If rvm is installed source it
+# I no longer have a strong need for RVM but in case I do again
+#
+PATH=$PATH:$HOME/.rvm/bin
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#
+fi
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
